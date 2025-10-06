@@ -1,91 +1,91 @@
-import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, Card, TextInput } from "react-native-paper";
 import { Todo } from "../types/Todo";
+import { Text } from "react-native";
+import { useEffect, useState } from "react";
 
-type TodoCardProps = {
-  todo: Todo;
-  handleDelete: (id: number) => void;
-  handleUpdate: (todo: Todo, id: number) => void;
+type Props = {
+  data: Todo;
+  onPressDeleteBtn: (id: string) => void;
+  onUpdate: (id: string, data: Todo) => void;
 };
 
-export const TodoCard = ({
-  todo,
-  handleDelete,
-  handleUpdate,
-}: TodoCardProps) => {
-  const [isEdit, setIsEdit] = useState(false);
-  const [value, setValue] = useState<string>(todo.title);
+export const TodoCard = ({ data, onPressDeleteBtn, onUpdate }: Props) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [input, setInput] = useState<string>(data.description);
 
-  const handleEditting = () => {
-    if (isEdit) {
-      handleUpdate({ ...todo, title: value }, todo.id);
-      setIsEdit(false);
+  const handleEdit = () => {
+    if (isEditing) {
+      const updatedTodo: Todo = {
+        ...data,
+        description: input,
+      };
+
+      onUpdate(data.id, updatedTodo);
+      setIsEditing(false);
     } else {
-      setIsEdit(true);
+      setIsEditing(true);
     }
   };
 
+  const handleCompleted = () => {
+    const updatedTodo: Todo = {
+      ...data,
+      isCompleted: !data.isCompleted,
+    };
+
+    onUpdate(data.id, updatedTodo);
+  };
+
+  useEffect(() => {
+    setInput(data.description);
+  }, [data.description]);
+
   return (
-    <View style={style.container}>
-      {isEdit ? (
-        <TextInput
-          style={style.inputContainer}
-          onChangeText={(text) => setValue(text)}
-          defaultValue={todo.title}
-        />
-      ) : (
-        <Text>{todo.title}</Text>
-      )}
-      <View style={style.buttonPanel}>
-        <Pressable style={[style.buttonContainer, { backgroundColor: "blue" }]}>
-          <Text
-            style={{ color: "white", textAlign: "center" }}
-            onPress={() => handleEditting()}
-          >
-            {isEdit ? "Xong" : "Cập nhật"}
+    <Card style={{ margin: 10, backgroundColor: "dimgray" }}>
+      <Card.Title
+        title={`${data.isCompleted ? "Hoàn thành" : "Chưa hoàn thành"}`}
+      />
+      <Card.Content>
+        {isEditing && (
+          <TextInput
+            label={"Mô tả công việc"}
+            onChangeText={(text) => setInput(text)}
+            value={input}
+          />
+        )}
+
+        {!isEditing && (
+          <Text style={{ color: "white", fontWeight: "bold" }}>
+            {data.description}
           </Text>
-        </Pressable>
-        <Pressable style={[style.buttonContainer, { backgroundColor: "red" }]}>
-          <Text
-            style={{ color: "white", textAlign: "center" }}
-            onPress={() => handleDelete(todo.id)}
-          >
-            Xóa
-          </Text>
-        </Pressable>
-      </View>
-    </View>
+        )}
+      </Card.Content>
+      <Card.Actions>
+        <Button
+          onPress={handleEdit}
+          mode="contained"
+          buttonColor="blue"
+          textColor="white"
+        >
+          Cập nhật
+        </Button>
+        <Button
+          onPress={() => onPressDeleteBtn(data.id)}
+          mode="contained"
+          buttonColor="red"
+          textColor="white"
+        >
+          Xóa
+        </Button>
+        <Button
+          onPress={handleCompleted}
+          mode="contained"
+          buttonColor="green"
+          textColor="white"
+        >
+          Hoàn thành
+        </Button>
+      </Card.Actions>
+    </Card>
   );
 };
-
-const style = StyleSheet.create({
-  container: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 20,
-    marginHorizontal: 15,
-    marginVertical: 10,
-    flex: 1,
-  },
-
-  buttonPanel: {
-    marginTop: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 20,
-  },
-
-  buttonContainer: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "black",
-    paddingVertical: 10,
-  },
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 20,
-  },
-});

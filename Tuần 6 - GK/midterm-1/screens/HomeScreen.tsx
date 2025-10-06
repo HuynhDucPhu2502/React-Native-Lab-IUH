@@ -1,24 +1,19 @@
-import React from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../App";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { Button } from "react-native-paper";
 
-type HomeScreenProps = NativeStackNavigationProp<RootStackParamList, "Home">;
+type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
-export const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenProps>();
-
+export const HomeScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
-      <Button
-        onPress={() => navigation.navigate("Profile")}
-        title="Xem hồ sơ"
-      />
-      <Button
-        onPress={() => navigation.navigate("Todo")}
-        title="Việc cần làm"
-      />
+      <Button mode="contained" onPress={() => navigation.navigate("Profile")}>
+        Profile Screen
+      </Button>
+      <Button onPress={() => navigation.navigate("Todo")} mode="contained">
+        Todo Screen
+      </Button>
     </View>
   );
 };
@@ -30,5 +25,3 @@ const styles = StyleSheet.create({
     gap: 20,
   },
 });
-
-export default HomeScreen;

@@ -1,82 +1,49 @@
-import React, { useState } from "react";
-import {
-  Button,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Button, Card, TextInput } from "react-native-paper";
 import { Todo } from "../types/Todo";
+import { Text } from "react-native";
+import { useState } from "react";
 
 type Props = {
-  onCreate: (todo: Todo) => void;
+  onPressCreateBtn: (data: Todo) => void;
 };
 
-export const TodoForm = ({ onCreate }: Props) => {
-  const [input, setInput] = useState<string | undefined>(undefined);
+export const TodoForm = ({ onPressCreateBtn }: Props) => {
+  const [input, setInput] = useState("");
 
-  const handleOnClick = () => {
-    if (input) {
-      const todo: Todo = {
-        id: Date.now(),
-        title: input,
-        completed: false,
+  const handlePressCreateBtn = () => {
+    if (input.trim()) {
+      const data: Todo = {
+        id: Date.now().toString(),
+        description: input,
+        isCompleted: false,
       };
 
-      onCreate(todo);
+      onPressCreateBtn(data);
       setInput("");
-      return;
     }
   };
 
   return (
-    <View style={style.container}>
-      <Text style={style.title}>Tạo việc cần làm</Text>
-      <TextInput
-        placeholder="Nhập tiêu đề vào đây"
-        value={input}
-        onChangeText={(text) => setInput(text)}
-      />
-      <Button title="Tạo" onPress={handleOnClick}></Button>
-    </View>
+    <Card style={{ margin: 10, backgroundColor: "gray" }}>
+      <Card.Title title="Tạo Todo" />
+
+      <Card.Content>
+        <TextInput
+          label={"Mô tả công việc"}
+          onChangeText={(text) => setInput(text)}
+        />
+      </Card.Content>
+
+      <Card.Actions>
+        <Button
+          onPress={handlePressCreateBtn}
+          mode="contained"
+          buttonColor="blue"
+          textColor="white"
+        >
+          Tạo mới
+        </Button>
+      </Card.Actions>
+    </Card>
   );
 };
-
-const style = StyleSheet.create({
-  container: {
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 20,
-    marginHorizontal: 15,
-    marginVertical: 10,
-  },
-
-  buttonPanel: {
-    marginTop: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 20,
-  },
-
-  buttonContainer: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: "black",
-    paddingVertical: 10,
-  },
-
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: "black",
-    borderRadius: 20,
-  },
-
-  title: {
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-});

@@ -1,56 +1,66 @@
-import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { useFetch } from "../hooks/useFetch";
+import { ActivityIndicator } from "react-native-paper";
 import { useEffect, useState } from "react";
 import { Todo } from "../types/Todo";
 import { TodoCard } from "../components/TodoCard";
 import { TodoForm } from "../components/TodoForm";
 
-const baseUrl = "https://drooly-uncentred-doug.ngrok-free.dev";
+const baseUrl = "https://68d67dd6c2a1754b426aeeb4.mockapi.io/";
 
 export const TodoScreen = () => {
-  const { get, post, put, del, isLoading, error } = useFetch(baseUrl);
-
   const [todos, setTodos] = useState<Todo[]>([]);
+  const { isLoading, get, post, put, del } = useFetch(baseUrl);
 
-  const getData = async () => {
-    get<Todo[]>("/todos").then((data) => {
-      if (data) setTodos(data);
-    });
+  const handleFetch = () => {
+    get("/todos").then((res) => setTodos(res));
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  useEffect(() => handleFetch(), []);
 
-  const handleDelete = (id: number) => {
-    del(`/todos/${id}`).then(() => getData());
+  const handleDelete = async (id: string) => {
+    await del(`/todos/${id}`);
+    handleFetch();
   };
 
-  const handleCreate = (todo: Todo) => {
-    post("/todos", todo).then(() => getData());
+  const handleCreate = async (data: Todo) => {
+    await post("/todos", data);
+    handleFetch();
   };
 
-  const handleUpdate = (todo: Todo, id: number) => {
-    put(`/todos/${id}`, todo).then(() => getData());
+  const handleUpdate = async (id: string, data: Todo) => {
+    await put(`/todos/${id}`, data);
+    handleFetch();
   };
 
   if (isLoading)
-    return <ActivityIndicator size="large" color="red" animating={true} />;
+    return (
+      <View style={[styles.container, { justifyContent: "center" }]}>
+        <ActivityIndicator size={"large"} animating={true} color="red" />
+      </View>
+    );
 
   return (
-    <View style={{ padding: 20 }}>
-      <TodoForm onCreate={handleCreate} />
+    <View style={styles.container}>
+      <TodoForm onPressCreateBtn={handleCreate} />
+
       <FlatList
         data={todos}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={(item) => (
+        keyExtractor={(item) => item.id}
+        renderItem={(root) => (
           <TodoCard
-            todo={item.item}
-            handleDelete={handleDelete}
-            handleUpdate={handleUpdate}
-          ></TodoCard>
+            onUpdate={handleUpdate}
+            onPressDeleteBtn={handleDelete}
+            data={root.item}
+          />
         )}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
