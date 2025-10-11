@@ -1,17 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../App";
-import {
-  FlatList,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, RefreshControl, StyleSheet, Text, View } from "react-native";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Product } from "../types/Product";
 import { useFetch } from "../hooks/useFetch";
-import { ActivityIndicator, Button, Card } from "react-native-paper";
+import { ActivityIndicator, Button, Card, TextInput } from "react-native-paper";
 import { ProductCard } from "../components/ProductCard";
 
 type Props = NativeStackScreenProps<RootStackParamList, "ProductList">;
@@ -28,9 +21,9 @@ export const ProductListScreen = ({ navigation }: Props) => {
     description: "",
   });
 
-  const titleRef = useRef<TextInput>(null);
-  const priceRef = useRef<TextInput>(null);
-  const descriptionRef = useRef<TextInput>(null);
+  const titleRef = useRef<typeof TextInput>(null);
+  const priceRef = useRef<typeof TextInput>(null);
+  const descriptionRef = useRef<typeof TextInput>(null);
 
   const handleChangeInput = (value: string, key: string) => {
     setFormData((prev) => {
