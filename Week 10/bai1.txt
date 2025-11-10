@@ -1,0 +1,11 @@
+Bước 1: tạo project
+
+npx create-expo-app <tên project> --example with-router-tailwind
+
+Bước 2: cài package
+
+npx expo install react-native-reanimated react-native-worklets react-native-paper expo-sqlite
+
+Bước 3: khai báo WebAssembly là tài nguyên hợp lệ cho project trong metro.config.js
+
+config.resolver.assetExts.push('wasm');

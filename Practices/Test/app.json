@@ -1,0 +1,9 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "plugins": ["expo-router"],
+    "name": "Test",
+    "slug": "Test",
+    "router": true
+  }
+}

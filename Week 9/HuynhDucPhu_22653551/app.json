@@ -1,0 +1,33 @@
+{
+  "scheme": "acme",
+  "userInterfaceStyle": "automatic",
+  "orientation": "default",
+  "web": {
+    "output": "static"
+  },
+  "plugins": [
+    [
+      "expo-router",
+      {
+        "origin": "https://n"
+      }
+    ],
+    "expo-sqlite"
+  ],
+  "name": "HuynhDucPhu_22653551",
+  "slug": "HuynhDucPhu_22653551",
+  "extra": {
+    "router": {
+      "origin": "https://n"
+    },
+    "eas": {
+      "projectId": "5675b2a6-bf3c-4b14-b74b-b2aff9b6ded1"
+    }
+  },
+  "owner": "huynhducphu",
+  "expo": {
+    "android": {
+      "package": "com.huynhducphu.HuynhDucPhu_22653551"
+    }
+  }
+}
