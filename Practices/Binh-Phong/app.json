@@ -1,7 +1,0 @@
-{
-  "plugins": [
-    "expo-sqlite"
-  ],
-  "name": "Binh-Phong",
-  "slug": "Binh-Phong"
-}

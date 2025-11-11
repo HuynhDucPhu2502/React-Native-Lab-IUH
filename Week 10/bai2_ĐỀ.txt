@@ -1,0 +1,8 @@
+App: Todo Tracker
+-	Sử dụng Expo-Sqlite để lưu dữ tại local thiết bị
+-	Sử dụng Expo-Router để di chuyển giữa các màn hình
+-	Có tiêu đề “Todo Tracker” ở trên cùng App
+-	Todo ít nhất phải có title, description, completed
+-	Cho phép thêm/sửa/xóa mềm Todo
+-	Khi xóa thì Todo xóa phải xuất hiện ở màn hình Trash
+-	Cho phép Restore item ở màn hình Trash
