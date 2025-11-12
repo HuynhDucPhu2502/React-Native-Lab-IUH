@@ -9,3 +9,10 @@ npx expo install react-native-reanimated react-native-worklets react-native-pape
 Bước 3: khai báo WebAssembly là tài nguyên hợp lệ cho project trong metro.config.js
 
 config.resolver.assetExts.push('wasm');
+config.server.enhanceMiddleware = (middleware) => {
+  return (req, res, next) => {
+    res.setHeader("Cross-Origin-Embedder-Policy", "credentialless");
+    res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+    middleware(req, res, next);
+  };
+};
