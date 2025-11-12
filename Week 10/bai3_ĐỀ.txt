@@ -1,8 +1,8 @@
 App: Money Log
+Có tiêu đề “Money Log” ở trên cùng App và dùng SafeAreaProvider
+Sử dụng Expo-Sqlite để lưu dữ tại local thiết bị
+
 Yêu cầu nhóm màn hình 1:
-•	Sử dụng Expo-Sqlite để lưu dữ tại local thiết bị
-•	Sử dụng Expo-Router để di chuyển giữa các màn hình
-•	Có tiêu đề “Money Log” ở trên cùng App và dùng SafeAreaProvider
 •	Màn hình khởi động App có thông tin sinh viên (họ tên, mã số, lớp).
 •	Có nút di chuyển đến nhóm màn hình 2
 Yêu cầu nhóm màn hình 2:
