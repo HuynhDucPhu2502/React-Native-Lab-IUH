@@ -1,0 +1,15 @@
+App: Money Log
+Yêu cầu nhóm màn hình 1:
+•	Sử dụng Expo-Sqlite để lưu dữ tại local thiết bị
+•	Sử dụng Expo-Router để di chuyển giữa các màn hình
+•	Có tiêu đề “Money Log” ở trên cùng App và dùng SafeAreaProvider
+•	Màn hình khởi động App có thông tin sinh viên (họ tên, mã số, lớp).
+•	Có nút di chuyển đến nhóm màn hình 2
+Yêu cầu nhóm màn hình 2:
+•	Transaction (giao dịch) ít nhất phải có title (tiêu đề), amount (số tiền), type “Income” (thu) hoặc “Expense” (chi)
+•	Có 3 màn hình con gồm danh sách giao dịch, biểu mẫu thêm/cập nhật giao dịch và danh sách giao dịch đã xóa
+•	Điều hướng các màn hình con theo dạng Tab Navigation
+•	Cho phép thêm/sửa/xóa mềm giao dịch
+•	Khi xóa thì xóa phải xuất hiện ở màn hình Trash. Cho phép restore (khôi phục) giao dịch đã xóa
+•	Tìm kiếm theo tiêu đề, theo loại tại màn hình danh sách giao dịch
+•	Sử dụng các hook useMemo để tối ưu, useFocusEffect để tải lại màn hình khi được mount
