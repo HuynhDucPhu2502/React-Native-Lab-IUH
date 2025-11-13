@@ -1,4 +1,4 @@
-App: Fitness Tracker
+App: Training Diary
 •	Có tiêu đề cố định “Training Diary” ở đầu ứng dụng và dùng SafeAreaProvider.
 •	Sử dụng Expo-SQLite để lưu lịch tập luyện ngay trong thiết bị.
 
