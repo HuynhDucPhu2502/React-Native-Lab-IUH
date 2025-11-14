@@ -48,6 +48,20 @@ export default function Layout() {
                 ),
               }}
             ></Tabs.Screen>
+            <Tabs.Screen
+              name="sync"
+              options={{
+                tabBarIcon: ({ focused, color }) => (
+                  <Icon source={"sync-circle"} size={24} color={color}></Icon>
+                ),
+              }}
+            ></Tabs.Screen>
+            <Tabs.Screen
+              name="index"
+              options={{
+                href: null,
+              }}
+            />
           </Tabs>
         </SafeAreaView>
       </SafeAreaProvider>
