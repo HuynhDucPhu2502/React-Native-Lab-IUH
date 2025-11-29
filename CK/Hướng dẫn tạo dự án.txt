@@ -1,0 +1,12 @@
+Bước 1: tạo project
+
+npx create-expo-app <tên project> --example with-router-tailwind
+
+Bước 2: cài package
+
+npx expo install react-native-reanimated react-native-worklets react-native-paper @reduxjs/toolkit react-redux
+
+
+Bước 3: chạy dự án
+
+npx expo start --tunnel --web
