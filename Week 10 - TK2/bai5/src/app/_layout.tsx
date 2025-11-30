@@ -23,6 +23,7 @@ export default function Layout() {
             <Tabs.Screen
               name="home"
               options={{
+                title: "Home"
                 tabBarIcon: ({ focused, color }) => (
                   <Icon
                     source={focused ? "home" : "home-outline"}

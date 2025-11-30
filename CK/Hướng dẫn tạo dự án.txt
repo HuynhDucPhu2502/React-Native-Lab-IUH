@@ -1,6 +1,6 @@
 Bước 1: tạo project
 
-npx create-expo-app <tên project> --example with-router-tailwind
+npx create-expo-app <tên project> --example with-tailwindcss
 
 Bước 2: cài package
 
